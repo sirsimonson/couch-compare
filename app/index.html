@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Couch-Check · Vergleich</title>
+  <meta name="description" content="71 Couches im Vergleich – Maße, Preis, Stoffe und Kriterien-Check.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛋️</text></svg>">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-inner">
+      <div class="brand">
+        <span class="logo" aria-hidden="true">🛋️</span>
+        <div>
+          <h1>Couch-Check</h1>
+          <p class="sub">71 Sofas gegen dein Profil geprüft</p>
+        </div>
+      </div>
+      <div class="top-actions">
+        <a class="ghost" href="data.json" download>Daten (JSON)</a>
+        <a class="ghost" href="https://github.com/sirsimonson/couch-compare" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="stats" id="stats" aria-label="Zusammenfassung"></section>
+
+    <section class="panel filters" aria-label="Filter">
+      <div class="filter-grid">
+        <label class="field search">
+          <span>Suche</span>
+          <input id="q" type="search" placeholder="Titel, Händler, Stoff, Farbe …" autocomplete="off">
+        </label>
+        <label class="field">
+          <span>Preissegment</span>
+          <select id="segment">
+            <option value="">Alle</option>
+            <option value="<1000">unter 1.000 €</option>
+            <option value=">=1000<1500">1.000–1.500 €</option>
+            <option value=">1500">über 1.500 €</option>
+            <option value="unbekannt">unbekannt</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Händler</span>
+          <select id="retailer"><option value="">Alle</option></select>
+        </label>
+        <label class="field">
+          <span>Sortierung</span>
+          <select id="sort">
+            <option value="score">Score (hoch → niedrig)</option>
+            <option value="price-asc">Preis (aufsteigend)</option>
+            <option value="price-desc">Preis (absteigend)</option>
+            <option value="width">Breite (aufsteigend)</option>
+            <option value="id">Nr.</option>
+          </select>
+        </label>
+        <label class="field range">
+          <span>Max. Preis: <output id="maxPriceOut">1.500 €</output></span>
+          <input id="maxPrice" type="range" min="400" max="1800" step="50" value="1500">
+        </label>
+        <label class="field range">
+          <span>Min. Score: <output id="minScoreOut">0</output></span>
+          <input id="minScore" type="range" min="0" max="10" step="0.5" value="0">
+        </label>
+      </div>
+      <div class="filter-foot">
+        <label class="check"><input id="onlyRec" type="checkbox"> Nur Empfehlungen</label>
+        <label class="check"><input id="onlySalbei" type="checkbox"> Salbeigrün verfügbar</label>
+        <label class="check"><input id="hideNon" type="checkbox" checked> Hocker/Listing/Bewertungsseite ausblenden</label>
+        <span class="spacer"></span>
+        <div class="viewtoggle" role="group" aria-label="Ansicht">
+          <button id="viewTable" class="active" type="button">Tabelle</button>
+          <button id="viewCards" type="button">Karten</button>
+        </div>
+        <button id="reset" class="ghost small" type="button">Zurücksetzen</button>
+      </div>
+    </section>
+
+    <div class="resultbar">
+      <strong id="count">–</strong>
+      <span id="hint" class="muted"></span>
+    </div>
+
+    <section id="tableView" class="tablewrap" aria-label="Couches">
+      <table>
+        <thead>
+          <tr>
+            <th class="c-score">Score</th>
+            <th>Couch</th>
+            <th class="c-price">Preis</th>
+            <th class="c-size">Breite × Tiefe × Höhe</th>
+            <th class="c-seat">Sitzhöhe</th>
+            <th class="c-shop">Händler</th>
+            <th class="c-color">Farbe</th>
+            <th class="c-rec">Empfehlung</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+      <p id="empty" class="empty" hidden>Keine Couch passt zu diesen Filtern.</p>
+    </section>
+
+    <section id="cardView" class="cards" hidden aria-label="Couches als Karten"></section>
+
+    <footer class="foot">
+      <p>Alle Angaben aus Händler-/Herstellerseiten, Stand 31.10.2026. Preise ohne Versand, teils Kundenkartenpreise.
+      Score = erfüllte Kriterien (14) gewichtet; Details in der jeweiligen Couch.</p>
+      <p>Kein Sofa erfüllt alle Kriterien – „Empfehlung“ heißt beste Näherung.</p>
+    </footer>
+  </main>
+
+  <dialog id="detail" class="detail" aria-labelledby="dTitle">
+    <button class="close" id="closeDetail" type="button" aria-label="Schließen">×</button>
+    <div id="detailBody"></div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>

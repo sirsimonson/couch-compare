@@ -1,0 +1,11 @@
+.git
+results
+prompts
+scripts
+out
+*.csv
+links.json
+shortlist.md
+METHODE.md
+prompt_template.md
+README.md

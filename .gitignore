@@ -1,0 +1,10 @@
+results/
+prompts/
+out/
+*.csv
+links.json
+shortlist.md
+METHODE.md
+prompt_template.md
+__pycache__/
+.DS_Store
